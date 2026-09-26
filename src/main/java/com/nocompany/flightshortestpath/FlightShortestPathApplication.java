@@ -16,7 +16,7 @@ public class FlightShortestPathApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        flightRouteService.findShortestPath();
+        flightRouteService.findShortestRoute(null, null, null);
     }
 
     public static void main(String[] args) {
