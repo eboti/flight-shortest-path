@@ -1,3 +1,6 @@
 spring:
   application:
     name: flight-shortest-path
+  jpa:
+    hibernate:
+      ddl-auto: validate
