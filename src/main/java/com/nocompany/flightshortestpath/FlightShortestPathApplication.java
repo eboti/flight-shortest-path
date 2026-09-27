@@ -1,5 +1,6 @@
 package com.nocompany.flightshortestpath;
 
+import com.nocompany.flightshortestpath.service.AirlineService;
 import com.nocompany.flightshortestpath.service.CityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -13,8 +14,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FlightShortestPathApplication implements CommandLineRunner {
 
     private final CityService cityService;
+    private final AirlineService airlineService;
+
     @Override
     public void run(String... args) {
+        log.info("Finding all airline company: ");
+        airlineService.findAll().forEach(airline -> log.info(airline.getName()));
         log.info("Smallest city: " + cityService.getSmallestCity().toString());
         log.info("Smallest city: " + cityService.getBiggestCity().toString());
     }
