@@ -1,15 +1,22 @@
 package com.nocompany.flightshortestpath;
 
+import com.nocompany.flightshortestpath.service.CityService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
+@Log
 @SpringBootApplication
+@RequiredArgsConstructor
 public class FlightShortestPathApplication implements CommandLineRunner {
 
+    private final CityService cityService;
     @Override
     public void run(String... args) {
+        log.info("Smallest city: " + cityService.getSmallestCity().toString());
+        log.info("Smallest city: " + cityService.getBiggestCity().toString());
     }
 
     public static void main(String[] args) {

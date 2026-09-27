@@ -22,17 +22,10 @@ public class FlightRouteServiceImpl implements FlightRouteService {
     }
 
     @Override
-    public List<FlightRoute> findAll() {
-        return flightRouteRepository.findAll();
-    }
-
-    @Override
     public RouteResult findShortestRoute(
             City fromCity,
             City toCity,
             List<FlightRoute> routes) {
-
-        log.info("Finding shortest flight route...");
 
         // Build adjacency list
         Map<City, List<FlightRoute>> graph = routes.stream()
@@ -103,8 +96,8 @@ public class FlightRouteServiceImpl implements FlightRouteService {
     }
 
     @Override
-    public void findAllRouteByAirline() {
-        log.info("Finding all flight routes by airline...");
+    public List<FlightRoute> findAll() {
+        return flightRouteRepository.findAll();
     }
 
     private record CityDistance(

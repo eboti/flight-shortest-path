@@ -5,10 +5,8 @@ import com.nocompany.flightshortestpath.model.City;
 import com.nocompany.flightshortestpath.model.FlightRoute;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public interface FlightRouteService {
-    List<FlightRoute> findAll();
 
     RouteResult findShortestRoute(
             City from,
@@ -16,6 +14,5 @@ public interface FlightRouteService {
             List<FlightRoute> flightRoutes
     );
 
-    // TODO this impl or in AirlineService?
-    void findAllRouteByAirline();
+    List<FlightRoute> findAll();
 }
