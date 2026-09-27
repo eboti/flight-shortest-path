@@ -14,7 +14,7 @@ CREATE TABLE flight_route (
     airline_id BIGINT,
     from_city_id BIGINT,
     to_city_id BIGINT,
-    distance_km DOUBLE PRECISION,
+    distance_km INTEGER,
     duration_minutes INTEGER,
     CONSTRAINT fk_flight_route_airline FOREIGN KEY (airline_id) REFERENCES airline (id),
     CONSTRAINT fk_flight_route_from_city FOREIGN KEY (from_city_id) REFERENCES city (id),

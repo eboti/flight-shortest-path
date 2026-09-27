@@ -48,7 +48,7 @@ public class FlightRouteServiceImpl implements FlightRouteService {
         PriorityQueue<CityDistance> queue =
                 new PriorityQueue<>(Comparator.comparingInt(CityDistance::distance));
 
-        distances.put(toCity, 0);
+        distances.put(fromCity, 0);
         queue.add(new CityDistance(fromCity, 0));
 
         while (!queue.isEmpty()) {

@@ -54,7 +54,7 @@ class FlightRouteFlywayTests {
         assertEquals("Wizz Air", route.getAirline().getName());
         assertEquals("Budapest", route.getFromCity().getName());
         assertEquals("Debrecen", route.getToCity().getName());
-        assertEquals(195.0, route.getDistanceKm());
+        assertEquals(195.0, route.getDistanceKm().doubleValue());
         assertEquals(50, route.getDurationMinutes());
     }
 
