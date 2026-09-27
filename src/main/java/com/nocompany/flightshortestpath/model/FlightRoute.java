@@ -6,10 +6,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
 @Setter
+@ToString
 public class FlightRoute {
     @Id
     private Long id;
@@ -26,6 +28,6 @@ public class FlightRoute {
     @JoinColumn(name = "toCityId")
     private City toCity;
 
-    private Double distanceKm;
+    private Integer distanceKm;
     private Integer durationMinutes;
 }

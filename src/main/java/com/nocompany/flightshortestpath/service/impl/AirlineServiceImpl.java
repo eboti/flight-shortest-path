@@ -1,6 +1,7 @@
 package com.nocompany.flightshortestpath.service.impl;
 
 import com.nocompany.flightshortestpath.model.Airline;
+import com.nocompany.flightshortestpath.model.FlightRoute;
 import com.nocompany.flightshortestpath.repository.AirlineRepository;
 import com.nocompany.flightshortestpath.service.AirlineService;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,12 @@ public class AirlineServiceImpl implements AirlineService {
     @Override
     public List<Airline> findAll() {
         return airlineRepository.findAll();
+    }
+
+    @Override
+    public List<FlightRoute> findAllFlightRouteByAirline(Airline airline) {
+        return airlineRepository.findById(airline.getId())
+                .map(Airline::getFlightRoutes)
+                .orElse(List.of());
     }
 }
