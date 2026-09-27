@@ -26,6 +26,6 @@ public class FlightRoute {
     @JoinColumn(name = "toCityId")
     private City toCity;
 
-    private Double distance_km;
-    private Integer duration_minutes;
+    private Double distanceKm;
+    private Integer durationMinutes;
 }

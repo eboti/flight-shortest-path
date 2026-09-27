@@ -32,22 +32,30 @@ class FlightRouteFlywayTests {
                 .filter(candidate -> candidate.getId().equals(1L))
                 .findFirst()
                 .orElseThrow();
+
         City city = cityService.findAll().stream()
                 .filter(candidate -> candidate.getId().equals(1L))
                 .findFirst()
                 .orElseThrow();
+
         FlightRoute route = flightRouteService.findAll().stream()
                 .filter(candidate -> candidate.getId().equals(1001L))
                 .findFirst()
                 .orElseThrow();
 
         assertEquals(2, airlineService.findAll().size());
-        assertEquals(5, cityService.findAll().size());
-        assertEquals(6, flightRouteService.findAll().size());
-        assertEquals("Northstar Air", airline.getName());
-        assertEquals("Boston", city.getName());
-        assertEquals("Northstar Air", route.getAirline().getName());
-        assertEquals("Boston", route.getFromCity().getName());
-        assertEquals("New York", route.getToCity().getName());
+        assertEquals(6, cityService.findAll().size());
+        assertEquals(20, flightRouteService.findAll().size());
+
+        assertEquals("Wizz Air", airline.getName());
+
+        assertEquals("Budapest", city.getName());
+
+        assertEquals("Wizz Air", route.getAirline().getName());
+        assertEquals("Budapest", route.getFromCity().getName());
+        assertEquals("Debrecen", route.getToCity().getName());
+        assertEquals(195.0, route.getDistanceKm());
+        assertEquals(50, route.getDurationMinutes());
     }
+
 }
