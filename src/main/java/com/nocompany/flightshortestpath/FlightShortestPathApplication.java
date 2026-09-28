@@ -20,8 +20,10 @@ public class FlightShortestPathApplication implements CommandLineRunner {
     public void run(String... args) {
         log.info("Finding all airline company: ");
         airlineService.findAll().forEach(airline -> log.info(airline.getName()));
-        log.info("Smallest city: " + cityService.getSmallestCity().toString());
-        log.info("Smallest city: " + cityService.getBiggestCity().toString());
+        if (!cityService.findAll().isEmpty()) {
+            log.info("Smallest city: " + cityService.getSmallestCity());
+            log.info("Biggest city: " + cityService.getBiggestCity());
+        }
     }
 
     public static void main(String[] args) {

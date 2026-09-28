@@ -4,3 +4,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+  flyway:
+    placeholders:
+      sampleDataEnabled: ${app.sample-data.enabled:true}
+
+app:
+  sample-data:
+    enabled: true

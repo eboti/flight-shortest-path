@@ -7,6 +7,26 @@
 ### Run app
 * mvn spring-boot:run
 
+### Initialize the database over HTTP
+
+The API replaces all airlines, cities, and flight routes with the supplied JSON dataset:
+
+```bash
+curl -X PUT http://localhost:8080/api/initial-data \
+  -H 'Content-Type: application/json' \
+  --data-binary @src/main/resources/sample-data.json
+```
+
+The request format is in `src/main/resources/sample-data.json`. Routes refer to airlines and cities by ID.
+
+Flyway creates the schema on startup and inserts example rows by default. Disable only the sample rows with:
+
+```bash
+mvn spring-boot:run -Dspring-boot.run.arguments=--app.sample-data.enabled=false
+```
+
+This setting applies when Flyway runs the sample-data migration against a new database. Schema migrations remain enabled.
+
 ### DB viewer
 
 * For database use browser: http://localhost:8080/h2-console/

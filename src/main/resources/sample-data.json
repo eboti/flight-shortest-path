@@ -1,0 +1,47 @@
+{
+  "airlines": [
+    {
+      "id": 1,
+      "name": "Wizz Air"
+    },
+    {
+      "id": 2,
+      "name": "Ryanair"
+    }
+  ],
+  "cities": [
+    {
+      "id": 1,
+      "name": "Budapest",
+      "population": 1680000
+    },
+    {
+      "id": 2,
+      "name": "Debrecen",
+      "population": 200000
+    },
+    {
+      "id": 3,
+      "name": "Hévíz",
+      "population": 4600
+    }
+  ],
+  "flightRoutes": [
+    {
+      "id": 1001,
+      "airlineId": 1,
+      "fromCityId": 1,
+      "toCityId": 2,
+      "distanceKm": 195,
+      "durationMinutes": 50
+    },
+    {
+      "id": 1002,
+      "airlineId": 2,
+      "fromCityId": 2,
+      "toCityId": 3,
+      "distanceKm": 300,
+      "durationMinutes": 65
+    }
+  ]
+}
