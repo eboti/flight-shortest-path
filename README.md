@@ -27,6 +27,12 @@ mvn spring-boot:run -Dspring-boot.run.arguments=--app.sample-data.enabled=false
 
 This setting applies when Flyway runs the sample-data migration against a new database. Schema migrations remain enabled.
 
+### Flight and city REST endpoints
+
+- `GET /api/flight-routes` returns all routes. Optionally filter using `fromCityId` and/or `toCityId`; an omitted parameter does not restrict that end of the route.
+- `GET /api/cities/extremes` returns the least- and most-populated cities.
+- `GET /api/routes/shortest?airlineId={id}` finds the shortest-distance route between those cities using only the selected airline. If `airlineId` is omitted, routes from all airlines are allowed. The response includes each leg, transfer cities, flight and waiting times, total journey time, and a message when no path exists.
+
 ### DB viewer
 
 * For database use browser: http://localhost:8080/h2-console/
