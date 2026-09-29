@@ -28,20 +28,20 @@ public class FlightRouteServiceImpl implements FlightRouteService {
             List<FlightRoute> routes) {
 
         // Build adjacency list
-        Map<City, List<FlightRoute>> graph = routes.stream()
-                .collect(Collectors.groupingBy(FlightRoute::getFromCity));
+        Map<Long, List<FlightRoute>> graph = routes.stream()
+                .collect(Collectors.groupingBy(route -> route.getFromCity().getId()));
 
         // Shortest known distance from source to each city
-        Map<City, Integer> distances = new HashMap<>();
+        Map<Long, Integer> distances = new HashMap<>();
 
         // Previous route used to reach each city
-        Map<City, FlightRoute> previousRoute = new HashMap<>();
+        Map<Long, FlightRoute> previousRoute = new HashMap<>();
 
         // Cities that still need to be processed
         PriorityQueue<CityDistance> queue =
                 new PriorityQueue<>(Comparator.comparingInt(CityDistance::distance));
 
-        distances.put(fromCity, 0);
+        distances.put(fromCity.getId(), 0);
         queue.add(new CityDistance(fromCity, 0));
 
         while (!queue.isEmpty()) {
@@ -52,42 +52,42 @@ public class FlightRouteServiceImpl implements FlightRouteService {
             int currentDistance = current.distance();
 
             // Ignore outdated queue entries
-            if (currentDistance > distances.getOrDefault(currentCity, Integer.MAX_VALUE)) {
+            if (currentDistance > distances.getOrDefault(currentCity.getId(), Integer.MAX_VALUE)) {
                 continue;
             }
 
             // Target reached
-            if (currentCity.equals(toCity)) {
+            if (currentCity.getId().equals(toCity.getId())) {
                 break;
             }
 
-            for (FlightRoute route : graph.getOrDefault(currentCity, List.of())) {
+            for (FlightRoute route : graph.getOrDefault(currentCity.getId(), List.of())) {
                 City nextCity = route.getToCity();
                 int newDistance = currentDistance + route.getDistanceKm();
-                int knownDistance = distances.getOrDefault(nextCity, Integer.MAX_VALUE);
+                int knownDistance = distances.getOrDefault(nextCity.getId(), Integer.MAX_VALUE);
 
                 if (newDistance < knownDistance) {
-                    distances.put(nextCity, newDistance);
-                    previousRoute.put(nextCity, route);
+                    distances.put(nextCity.getId(), newDistance);
+                    previousRoute.put(nextCity.getId(), route);
                     queue.add(new CityDistance(nextCity, newDistance));
                 }
             }
         }
 
         // No path exists
-        if (!distances.containsKey(toCity)) {
+        if (!distances.containsKey(toCity.getId())) {
             return RouteResult.noPath(fromCity, toCity);
         }
 
         // Reconstruct path
         List<FlightRoute> shortestPath = new ArrayList<>();
 
-        City current = toCity;
+        Long currentCityId = toCity.getId();
 
-        while (!current.equals(fromCity)) {
-            FlightRoute route = previousRoute.get(current);
+        while (!currentCityId.equals(fromCity.getId())) {
+            FlightRoute route = previousRoute.get(currentCityId);
             shortestPath.add(route);
-            current = route.getFromCity();
+            currentCityId = route.getFromCity().getId();
         }
 
         Collections.reverse(shortestPath);
